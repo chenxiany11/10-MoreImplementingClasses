@@ -22,7 +22,7 @@ def main():
     # run_test_simple_t()
     # run_test_set_colors()
     # run_test_move_by()
-    # run_test_clone()
+    run_test_clone()
 
 
 def run_test_simple_t():
@@ -146,12 +146,27 @@ class CapitalT(object):
           :type letter_thickness:   int
         """
         # --------------------------------------------------------------
-        # TODO: 3.
+        # DONE: 3.
         #   READ the above specification, including the Example.
         #   Implement this method
         #   Note: you will need to also implement attach_to before testing
         # --------------------------------------------------------------
-        
+        self.center = intersection_center
+        x = intersection_center.x
+        y = intersection_center.y
+        thickness = letter_thickness
+        hx_l = rg.Point(x-0.5*width, y-0.5*thickness)
+        hx_r = rg.Point(x+0.5*width, y+0.5*thickness)
+        self.h_rect = rg.Rectangle(hx_l, hx_r)
+        vx_l = rg.Point(x-0.5*thickness, y-0.5*thickness)
+        vx_r = rg.Point(x+0.5*thickness, y+height-0.5*thickness)
+        self.v_rect = rg.Rectangle(vx_l, vx_r)
+        self.start_width = width
+        self.start_height = height
+        self.start_thickness = thickness
+        self.start_x = x
+        self.start_y = y
+        self.c_move = rg.Point(x, y)
 
     def attach_to(self, window):
         """
@@ -172,11 +187,14 @@ class CapitalT(object):
           :type window: rg.RoseWindow
         """
         # --------------------------------------------------------------
-        # TODO: 4.
+        # DONE: 4.
         #   READ the above specification, including the Example.
         #   Implement and test this method by looking at the console and
         #     the graphics window (compare it to simple_t.pdf)
         # --------------------------------------------------------------
+        self.v_rect.attach_to(window)
+        self.h_rect.attach_to(window)
+
 
     def set_colors(self, fill_color, outline_color):
         """
@@ -199,12 +217,16 @@ class CapitalT(object):
           :type outline_color: str
         """
         # --------------------------------------------------------------
-        # TODO: 5.
+        # DONE: 5.
         #   READ the above specification, including the Example.
         #   Implement and test this method by uncommenting the appropriate
         #     run_test method in main. Compare the graphics window to
         #     set_colors.pdf.
         # --------------------------------------------------------------
+        self.h_rect.fill_color = fill_color
+        self.v_rect.fill_color = fill_color
+        self.h_rect.outline_color = outline_color
+        self.v_rect.outline_color = outline_color
 
     def move_by(self, dx, dy):
         """
@@ -229,13 +251,16 @@ class CapitalT(object):
           :type dy: int
         """
         # --------------------------------------------------------------
-        # TODO: 6.
+        # DONE: 6.
         #   READ the above specification, including the Example.
         #   Implement and test this method by uncommenting the appropriate
         #     run_test method in main. Compare the graphics window to
         #     move_by.pdf. Note: the pdf shows the different locations
         #     that the T moves through, but there is only 1 T at any moment.
         # --------------------------------------------------------------
+        after_v = rg.Rectangle(self.v_rect.move_by(dx, dy))
+        after_h = rg.Rectangle(self.h_rect.move_by(dx, dy))
+        self.c_move = rg.Point(after_v.get_center())
 
     def clone(self):
         """
@@ -263,7 +288,10 @@ class CapitalT(object):
         #     run_test method in main. Compare the graphics window to
         #     clone.pdf.
         # --------------------------------------------------------------
-
+        center = self.c_move
+        new_c = CapitalT(center, self.start_width, self.start_height, self.start_thickness)
+        
+        return new_c
 
 # ----------------------------------------------------------------------
 # If this module is running at the top level (as opposed to being
