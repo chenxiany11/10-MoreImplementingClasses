@@ -98,19 +98,23 @@ class Baby(object):
     def __init__(self, string):
         self.string = string
         print('Hello baby ' + self.string + '!')
-        self.time = 0
+        self.time = 1
 
     def feed_baby(self):
         print('Thank you for feeding baby ' + self.string + '.')
+        self.time = 1
 
     def hour_passes(self):
-        self.time += 1
+
         if self.time == 1:
             print('Baby ' + self.string + ' is sleeping.')
+            self.time += 1
         elif self.time == 2:
             print('Baby ' + self.string + ' is awake.  Time for food.')
+            self.time += 1
         else:
             print('Baby ' + self.string + ' is CRYING uncontrollably!  Feed the Baby!')
+            self.time += 1
 
 
 # ----------------------------------------------------------------------

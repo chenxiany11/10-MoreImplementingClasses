@@ -699,7 +699,7 @@ class Line(object):
             print(line2)  # Should print: Line[(0, 1), (10, 20)]
         """
         # --------------------------------------------------------------
-        # TODO: 13.
+        # DONE: 13.
         #   a. READ the above specification, including the Example.
         #        ** ASK QUESTIONS AS NEEDED. **
         #        ** Be sure you understand it, ESPECIALLY the Example.
@@ -708,7 +708,11 @@ class Line(object):
         #        They include the Example in the above doc-string.
         # --------------------------------------------------------------
 
-        return Line(self.begin, self.stop)
+        self.start = self.begin
+        self.end = self.stop
+        return self
+
+
 
 ########################################################################
 # The TEST functions for the  Line  class begin here.

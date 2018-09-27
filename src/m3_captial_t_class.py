@@ -290,7 +290,7 @@ class CapitalT(object):
         # --------------------------------------------------------------
         center = self.c_move
         new_c = CapitalT(center, self.start_width, self.start_height, self.start_thickness)
-        
+
         return new_c
 
 # ----------------------------------------------------------------------
