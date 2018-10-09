@@ -19,9 +19,9 @@ def main():
     print('Un-comment the calls in MAIN one by one')
     print(' to run the testing code as you complete the TODOs.')
 
-    # run_test_simple_t()
-    # run_test_set_colors()
-    # run_test_move_by()
+    run_test_simple_t()
+    run_test_set_colors()
+    run_test_move_by()
     run_test_clone()
 
 
@@ -251,16 +251,15 @@ class CapitalT(object):
           :type dy: int
         """
         # --------------------------------------------------------------
-        # DONE: 6.
+        # done: 6.
         #   READ the above specification, including the Example.
         #   Implement and test this method by uncommenting the appropriate
         #     run_test method in main. Compare the graphics window to
         #     move_by.pdf. Note: the pdf shows the different locations
         #     that the T moves through, but there is only 1 T at any moment.
         # --------------------------------------------------------------
-        after_v = rg.Rectangle(self.v_rect.move_by(dx, dy))
-        after_h = rg.Rectangle(self.h_rect.move_by(dx, dy))
-        self.c_move = rg.Point(after_v.get_center())
+        self.h_rect.move_by(dx, dy)
+        self.v_rect.move_by(dx, dy)
 
     def clone(self):
         """
@@ -282,15 +281,15 @@ class CapitalT(object):
           :rtype: CapitalT
         """
         # --------------------------------------------------------------
-        # TODO: 7.
+        # done: 7.
         #   READ the above specification, including the Example.
         #   Implement and test this method by uncommenting the appropriate
         #     run_test method in main. Compare the graphics window to
         #     clone.pdf.
         # --------------------------------------------------------------
-        center = self.c_move
-        new_c = CapitalT(center, self.start_width, self.start_height, self.start_thickness)
 
+        new_c = CapitalT(self.center, self.start_width, self.start_height, self.start_thickness)
+        new_c.set_colors(self.v_rect.fill_color, self.v_rect.outline_color)
         return new_c
 
 # ----------------------------------------------------------------------
